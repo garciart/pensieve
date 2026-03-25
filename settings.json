@@ -1,0 +1,25 @@
+{
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+        72,
+        {
+            "column": 80,
+            "color": "#006600"
+        },
+        {
+            "column": 100,
+            "color": "#666600"
+        },
+        {
+            "column": 120,
+            "color": "#660000"
+        }
+    ],
+    "explorer.autoReveal": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "editor.inlineSuggest.enabled": false
+}
