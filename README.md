@@ -1,2 +1,2 @@
 # pensieve
-Snippets and other things that I use all the time.
+Snippets and other things that I use or need constantly.
