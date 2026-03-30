@@ -2,7 +2,7 @@
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.insertSpaces": true,
-        "editor.rulers": [
+    "editor.rulers": [
         72,
         {
             "column": 80,
@@ -21,5 +21,13 @@
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "github.copilot.nextEditSuggestions.enabled": false,
-    "editor.inlineSuggest.enabled": false
+    "editor.inlineSuggest.enabled": false,
+    "workbench.colorCustomizations": {
+        "editor.findMatchHighlightBorder": "#666600",
+        "editor.findMatchBorder": "#FF0000"
+    },
+    "autopep8.args": [
+        "--max-line-length",
+        "100"
+    ]
 }

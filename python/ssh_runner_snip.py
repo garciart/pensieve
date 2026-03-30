@@ -5,6 +5,10 @@ NOTE:
 - The script requires the sshpass binary, but it can be modified to use SSH keys.
 - Use `;`, `&&`, `||`, or `|` to run, evaluate, or pipe multiple commands.
 
+TODO:
+
+- Replace sshpass with SSH keys.
+
 Usage:
 
 CLI - python -B ssh_runner_snip.py
@@ -78,8 +82,7 @@ class SSHRunner:
             # If PowerShell, ensure `pwsh` command is present
             _ps_tuple = ('powercli', 'powershell', 'pwsh')
             if shell in _ps_tuple and not command.startswith(_ps_tuple):
-                # Use here-strings `@'...'@` to escape special chars
-                command = f"pwsh -NoProfile -Command @'{command}'@"
+                command = f"pwsh -NoProfile -Command '{command}'"
             else:
                 # Use shlex.quote to escape special chars
                 command = shlex.quote(command)
@@ -126,9 +129,8 @@ if __name__ == '__main__':
     try:
         ssh_user = input('Enter your username: ')
         ssh_password = getpass.getpass('Enter password: ')
-        runner = SSHRunner(target='localhost',
-                           username=ssh_user, password=ssh_password)
-        result, err = runner.run(command='whoami; pwd; ls -la', shell='bash')
+        ssh_runner = SSHRunner(target='localhost', username=ssh_user, password=ssh_password)
+        result, err = ssh_runner.run(command='whoami; pwd; ls -la', shell='bash')
         msg = err if result is None or str(result).strip() == '' else result
         print(msg)
     except (EOFError, TypeError, ValueError, subprocess.TimeoutExpired,

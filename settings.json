@@ -21,5 +21,9 @@
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "github.copilot.nextEditSuggestions.enabled": false,
-    "editor.inlineSuggest.enabled": false
+    "editor.inlineSuggest.enabled": false,
+    "workbench.colorCustomizations": {
+        "editor.findMatchHighlightBorder": "#666600",
+        "editor.findMatchBorder": "#FF0000"
+    }
 }
