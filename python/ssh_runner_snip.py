@@ -23,14 +23,13 @@ From code:
 """
 import getpass
 import os
-import shlex
 import subprocess
 
 
 class SSHRunner:
     """Class for running commands on remote nodes using SSH."""
 
-    VALID_SHELLS = ['bash', 'photonos', 'powercli', 'powershell', 'pwsh', 'sh']
+    VALID_SHELLS = ['bash', 'photonos', 'powercli', 'powershell', 'pwsh', 'sh', 'zsh']
     INVALID_SHELL_MSG = f"Invalid shell. Must be one of the following: {VALID_SHELLS}"
     PARAMETER_ERR_MSG = "Error: '{0}' is an invalid type or has an invalid value."
 
@@ -79,13 +78,13 @@ class SSHRunner:
             _env = os.environ.copy()
             _env['SSHPASS'] = self.password
 
-            # If PowerShell, ensure `pwsh` command is present
+            if (command.split())[0].lower() in self.VALID_SHELLS:
+                return None, 'Do not include the shell in the command.'
+
+            # If PowerShell, add options
             _ps_tuple = ('powercli', 'powershell', 'pwsh')
-            if shell in _ps_tuple and not command.startswith(_ps_tuple):
-                command = f"pwsh -NoProfile -Command '{command}'"
-            else:
-                # Use shlex.quote to escape special chars
-                command = shlex.quote(command)
+            if shell in _ps_tuple:
+                command = f"pwsh -NoProfile -Command {command}"
 
             # Build the command
             # Use `sshpass -e` to read the SSHPASS env variable
@@ -131,7 +130,7 @@ if __name__ == '__main__':
         ssh_password = getpass.getpass('Enter password: ')
         ssh_runner = SSHRunner(target='localhost', username=ssh_user, password=ssh_password)
         result, err = ssh_runner.run(command='whoami; pwd; ls -la', shell='bash')
-        msg = err if result is None or str(result).strip() == '' else result
+        msg = err if str(result).strip() == '' else result
         print(msg)
     except (EOFError, TypeError, ValueError, subprocess.TimeoutExpired,
             subprocess.CalledProcessError) as e:
