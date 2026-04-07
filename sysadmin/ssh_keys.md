@@ -28,7 +28,7 @@ Steps:
 2. Run `ssh-keygen`, specifying the asymmetric (public-key) cryptography system to use, the size of the key in bits, and a location for the key file; do not create a passphrase (e.g., `ssh-keygen -t rsa -b 4096 -f '~/.ssh/id_rsa' -N ""`). This will create an SSH key pair on the host node at `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` (private and public keys, respectively).
 3. Copy the key to the remote node:
 
-    - Use `ssh-copy-id` to copy the key to the remote node (e.g., `ssh-copy-id username@remote.node.ip`). The default location on the remote node will be `~/.ssh/authorized_keys`.
+    - Use `ssh-copy-id` to copy the public key to the remote node (e.g., `ssh-copy-id username@remote.node.ip`). The default location on the remote node will be `~/.ssh/authorized_keys`.
     - If that does not work, try `cat ~/.ssh/id_rsa.pub | ssh username@remote.node.ip "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"`.
 
 4. Attempt to connect to the remote node (e.g., `ssh username@remote.node.ip`).
